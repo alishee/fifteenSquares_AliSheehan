@@ -2,15 +2,14 @@ package com.example.fifteensquares_alisheehan;
 
 public class GridModel {
 
-    public int numRows;
+    public int numRows = 4;
     public int gridSize;
     public int[] gridValues;
 
 
-    public GridModel(int gSize) {
-        numRows = gSize;
+    public GridModel() {
         gridSize = numRows * numRows;
-        gridValues = new int[gSize];
+        gridValues = new int[gridSize];
 
     }
 }
