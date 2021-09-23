@@ -12,8 +12,11 @@ public class PlayGridView extends SurfaceView {
     public static final float gridWidth = 1000f;
     public static final float gridTop = 100f;
     public static final float gridLeft = 100f;
+    public static final float borderWidth = 10f;
+    public static final float squareWidth = 237.5f;
 
     Paint background = new Paint();
+    Paint borders = new Paint();
 
     public PlayGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -22,12 +25,28 @@ public class PlayGridView extends SurfaceView {
 
         background.setColor(Color.RED);
         background.setStyle(Paint.Style.FILL);
+        borders.setColor(Color.BLUE);
+        borders.setStyle(Paint.Style.FILL);
     }
 
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawRect(gridTop, gridLeft, gridWidth + gridTop, gridWidth + gridLeft, background);
+        float top = gridTop;
+        float left = gridLeft;
+
+        canvas.drawRect(gridLeft, gridTop, gridWidth + gridLeft,
+                gridWidth + gridTop, background);
+
+        for (int i = 0; i < 5; i++ ) {
+            canvas.drawRect(left, gridTop, left + borderWidth,  gridTop + gridWidth, borders);
+            left = left + borderWidth + squareWidth;
+        }
+        for (int i = 0; i < 5; i++ ) {
+            canvas.drawRect(gridLeft, top, gridLeft + gridWidth,  top + borderWidth, borders);
+            top = top + borderWidth + squareWidth;
+        }
+
     }
 }//onDraw
 
