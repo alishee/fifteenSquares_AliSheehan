@@ -23,9 +23,9 @@ public class PlayGridView extends SurfaceView {
 
         setWillNotDraw(false);
 
-        background.setColor(Color.RED);
+        background.setColor(Color.LTGRAY);
         background.setStyle(Paint.Style.FILL);
-        borders.setColor(Color.BLUE);
+        borders.setColor(Color.DKGRAY);
         borders.setStyle(Paint.Style.FILL);
     }
 
