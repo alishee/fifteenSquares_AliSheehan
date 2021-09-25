@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -39,8 +40,8 @@ public class PlayGridView extends SurfaceView {
         setBackgroundColor(0xFFE1C699);
 
         gridModel = new GridModel();
-
         squareWidth = (gridWidth - ((gridModel.numRows + 1) * borderWidth)) / gridModel.numRows;
+
 
     }
 
@@ -58,9 +59,11 @@ public class PlayGridView extends SurfaceView {
         float top = gridTop;
         float left = gridLeft;
 
+        // Draw the base for the grid
         canvas.drawRect(gridLeft, gridTop, gridWidth + gridLeft,
                 gridWidth + gridTop, background);
 
+        //Draw the borders for the grid
         for (int i = 0; i < gridModel.numRows + 1; i++ ) {
             canvas.drawRect(left, gridTop, left + borderWidth,  gridTop + gridWidth, borders);
             left = left + borderWidth + squareWidth;
@@ -69,6 +72,17 @@ public class PlayGridView extends SurfaceView {
             canvas.drawRect(gridLeft, top, gridLeft + gridWidth,  top + borderWidth, borders);
             top = top + borderWidth + squareWidth;
         }
+
+        //Draw rectangles from GridRect[][]
+        for (int i = 0; i < gridModel.numRows; i++){
+            for (int j = 0; j < gridModel.numRows; j++) {
+                if (gridModel.gridRects[i][j].value != -1) {
+                    canvas.drawRect(gridModel.gridRects[i][j].square, gridModel.gridRects[i][j].squarePaint);
+                    canvas.drawText(gridModel.gridRects[i][j].value + "", gridModel.gridRects[i][j].square.centerX(), gridModel.gridRects[i][j].square.centerY(), gridModel.gridRects[i][j].textPaint);
+                }
+            }
+        }
+
 
     }
 }//onDraw

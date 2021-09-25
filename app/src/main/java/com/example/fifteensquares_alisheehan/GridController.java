@@ -1,9 +1,11 @@
 package com.example.fifteensquares_alisheehan;
 
+import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 import android.widget.SeekBar;
 
-public class GridController implements SeekBar.OnSeekBarChangeListener {
+public class GridController implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
 
     private PlayGridView gridView;
     private GridModel gridModel;
@@ -15,9 +17,16 @@ public class GridController implements SeekBar.OnSeekBarChangeListener {
 
     }
 
+
+    /**
+     * Resizes the grid based on the current value of seekBar.
+     */
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        //
         gridModel.numRows = i;
+        // Adjust size and number of squares
+        gridModel.initializeRects();
         gridView.invalidate();
         Log.i("i", "" +gridView.squareWidth);
     }
@@ -30,5 +39,23 @@ public class GridController implements SeekBar.OnSeekBarChangeListener {
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.exitButton:
+
+
+
+            /*
+             * RESTART BUTTON FUNCTIONALITY
+             * Randomly scrambles the squares to start a new game. Does not change grid size.
+             */
+            case R.id.restartButton:
+                gridModel.initializeRects();
+                gridView.invalidate();
+        }
     }
 }

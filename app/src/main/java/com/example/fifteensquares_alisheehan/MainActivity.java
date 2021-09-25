@@ -2,10 +2,9 @@ package com.example.fifteensquares_alisheehan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.widget.GridView;
+import android.widget.Button;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,16 +14,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Can get screen height and width here? I'm not sure it makes much of a difference or how to use it
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
 
-        GridController controller = new GridController((PlayGridView) findViewById(R.id.playGridView));
+        GridController controller = new GridController( findViewById(R.id.playGridView));
 
-        SeekBar seekGridSize = (SeekBar) findViewById(R.id.seekGridSize);
+        // Set Seek Bar functionality
+        SeekBar seekGridSize = findViewById(R.id.seekGridSize);
         seekGridSize.setOnSeekBarChangeListener(controller);
+
+        // Set restart button functionality
+        Button restartButton = findViewById(R.id.restartButton);
+        restartButton.setOnClickListener(controller);
 
 
 
