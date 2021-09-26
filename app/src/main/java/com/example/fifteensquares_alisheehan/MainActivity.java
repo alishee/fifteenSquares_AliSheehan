@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         Button restartButton = findViewById(R.id.restartButton);
         restartButton.setOnClickListener(controller);
 
+        PlayGridView gridView = findViewById(R.id.playGridView);
+        gridView.setOnTouchListener(controller);
+
 
 
     }

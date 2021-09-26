@@ -1,14 +1,15 @@
 package com.example.fifteensquares_alisheehan;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class GridModel {
 
     public int numRows = 4;
     public int gridSize;
     public int[] gridValues;
+    public int[] locations;
     public GridRect[][] gridRects;
+
 
     private float squareWidth;
 
@@ -45,7 +46,7 @@ public class GridModel {
 
 
         // Use a helper method to randomize
-        int[] locations = randomizeLocation();
+        locations = randomizeLocation();
 
 
         int i, j;
@@ -63,9 +64,18 @@ public class GridModel {
             }
         }
     }
-    public int[] randomizeLocation() {
-        int[] ret;                                                                                      //https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
 
+
+    /**
+     * Randomize the >.>
+     *
+     * Credit to solution found on Stack Overflow:
+     *  //https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
+     *
+     * @return
+     */
+    public int[] randomizeLocation() {
+        int[] ret;
 
         ret = gridValues.clone();
 
@@ -82,5 +92,40 @@ public class GridModel {
         return ret;
     }
 
+    public boolean isOnGrid(int x, int y) {
+        boolean isValid = false;
+        if ( PlayGridView.gridLeft + PlayGridView.borderWidth < x
+                && x < PlayGridView.gridWidth + PlayGridView.gridLeft + PlayGridView.borderWidth) {
+            if (PlayGridView.gridTop + PlayGridView.borderWidth < y
+                    && y < PlayGridView.gridWidth + PlayGridView.gridTop + PlayGridView.borderWidth) {
+                isValid = true;
+            }
+        }
+        return isValid;
+    }
 
+    public int whichSquare(int x, int y) {
+
+        // Increment through gridRects for a square containing clicked point
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numRows; j++) {
+                if(gridRects[i][j].square.left < x && gridRects[i][j].square.right > x) {
+                    if (gridRects[i][j].square.top < y && gridRects[i][j].square.bottom > y) {
+
+                    // return the position of the gridRect object as found in the int array position
+                        return (i * numRows) + (j+1);
+                    }
+                }
+            }
+        }
+
+        // Return -1 if clicked on a border
+        return -1;
+    }
+
+    public int validMove(int location) {
+        //CHECK IF NEXT TO NULL SQUARE
+
+        return -1;
+    }
 }

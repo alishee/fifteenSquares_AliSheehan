@@ -49,7 +49,7 @@ public class GridRect {
         // Sets text to be black, centered, size 36
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(36);
+        textPaint.setTextSize(64);
         textPaint.setTextAlign(Paint.Align.CENTER);
     }
 

@@ -2,10 +2,11 @@ package com.example.fifteensquares_alisheehan;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SeekBar;
 
-public class GridController implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
+public class GridController implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, View.OnTouchListener {
 
     private PlayGridView gridView;
     private GridModel gridModel;
@@ -57,5 +58,19 @@ public class GridController implements SeekBar.OnSeekBarChangeListener, View.OnC
                 gridModel.initializeRects();
                 gridView.invalidate();
         }
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        int x = (int) motionEvent.getX();
+        int y = (int) motionEvent.getY();
+        if (gridModel.isOnGrid(x,y)) {
+            int currentLocation = gridModel.whichSquare(x,y);
+            gridView.whichSquare = currentLocation;
+        } else {
+            gridView.whichSquare = -1;
+        }
+        view.invalidate();
+        return false;
     }
 }

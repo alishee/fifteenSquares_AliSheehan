@@ -20,6 +20,8 @@ public class PlayGridView extends SurfaceView {
 
     public float squareWidth;
 
+    public int whichSquare = -1;
+
     Paint background = new Paint();
     Paint borders = new Paint();
 
@@ -83,7 +85,13 @@ public class PlayGridView extends SurfaceView {
             }
         }
 
-
+        if (whichSquare != -1){
+            Paint temp = new Paint();
+            temp.setStyle(Paint.Style.FILL);
+            temp.setColor(Color.BLACK);
+            temp.setTextSize(36);
+            canvas.drawText(whichSquare + "", 100f, 1700f, temp);
+        }
     }
 }//onDraw
 
