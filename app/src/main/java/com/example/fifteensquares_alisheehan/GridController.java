@@ -11,6 +11,12 @@ public class GridController implements SeekBar.OnSeekBarChangeListener, View.OnC
     private PlayGridView gridView;
     private GridModel gridModel;
 
+    /**
+     * Constructor for GridController object. Requires instance of PlayGridView object to make
+     * associated gridModel object.
+     *
+     * @param gridViewInstance existing PlayGridView
+     */
     public GridController(PlayGridView gridViewInstance) {
         gridView = gridViewInstance;
         gridModel = gridView.getGridModel();
@@ -24,6 +30,7 @@ public class GridController implements SeekBar.OnSeekBarChangeListener, View.OnC
      */
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        // Update desired size of grid
         gridModel.numRows = i;
         // Adjust size and number of squares
         gridModel.initializeRects(true);

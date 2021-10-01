@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Button restartButton = findViewById(R.id.restartButton);
         restartButton.setOnClickListener(controller);
 
+        // Allow for interaction with game board
         PlayGridView gridView = findViewById(R.id.playGridView);
         gridView.setOnTouchListener(controller);
 
@@ -41,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
      * @param button button to cause app turn off
      */
     public void goodbye(View button) {
-
-
         finishAffinity();
-
     }
 }

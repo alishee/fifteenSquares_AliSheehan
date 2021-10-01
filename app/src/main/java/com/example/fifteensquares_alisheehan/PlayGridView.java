@@ -20,44 +20,57 @@ public class PlayGridView extends SurfaceView {
 
     public float squareWidth;
 
-
-
     Paint background = new Paint();
     Paint borders = new Paint();
 
     GridModel gridModel;
 
+    /**
+     * Constructor for PlayGridView class
+     */
     public PlayGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setWillNotDraw(false);
 
+        //Set Paint settings for background and borders
         background.setColor(Color.LTGRAY);
         background.setStyle(Paint.Style.FILL);
         borders.setColor(Color.DKGRAY);
         borders.setStyle(Paint.Style.FILL);
 
 
-
         setBackgroundColor(0xFFE1C699);
 
+        // Create gridModel and calculate square width based on gridModel variables
         gridModel = new GridModel();
         squareWidth = (gridWidth - ((gridModel.numRows + 1) * borderWidth)) / gridModel.numRows;
 
 
     }
 
+    /**
+     * Returns the gridModel associated with this PlayGridView object.
+     *
+     * @return GridModel object for use with PlayGridView
+     */
     public GridModel getGridModel() {
         return gridModel;
     }
 
+    /**
+     * onDraw method for PlayGridView object.
+     *
+     *
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas) {
 
         //Update squareWidth with SeekBar changes
         squareWidth = (gridWidth - ((gridModel.numRows + 1) * borderWidth)) / gridModel.numRows;
 
-        //
+        //set top and left values to use while drawing
         float top = gridTop;
         float left = gridLeft;
 
@@ -75,7 +88,7 @@ public class PlayGridView extends SurfaceView {
             top = top + borderWidth + squareWidth;
         }
 
-        //Draw rectangles from GridRect[][]
+        //Draw rectangles from values in GridRect[][]
         for (int i = 0; i < gridModel.numRows; i++){
             for (int j = 0; j < gridModel.numRows; j++) {
                 if (gridModel.gridRects[i][j].value != -1) {

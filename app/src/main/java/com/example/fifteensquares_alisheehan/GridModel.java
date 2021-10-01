@@ -4,11 +4,12 @@ import java.util.Random;
 
 public class GridModel {
 
-    public int numRows = 4;
-    public int gridSize;
-    public int[] gridValues;
-    public int[] locations;
-    public GridRect[][] gridRects;
+
+    public int numRows = 4;             //integer value for numRows. Upon launch is set to 4.
+    public int gridSize;                //integer value for gridSize. Initialized in initializeRects()
+    public int[] gridValues;            //integer array of grid Values
+    public int[] locations;             //integer array containing data about the locations
+    public GridRect[][] gridRects;      //2-dimensional array of custom class GridRect objects
 
 
     private float squareWidth;
@@ -76,20 +77,27 @@ public class GridModel {
     /**
      * Copy the array gridValues to a new array and randomize the values to determine location on grid
      *
-     * Credit to solution found on Stack Overflow:
+     * External Citation
+     *  Date: 23 September 2021
+     *  Problem: Needed to shuffle an array of values randomly
+     *
+     *  Resource:
      *  //https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
+     *  Solution:I used the code from this post (but modified the randomization to go by time in millis)
      *
      * @return array of values shuffled into positions indicated by index of array
      */
     public int[] randomizeLocation() {
         int[] ret;
 
+        //Clone gridValues for shuffle and return
         ret = gridValues.clone();
 
+        // Generate random seed to dictate swap
         Random rnd = new Random(System.currentTimeMillis());
         for (int i = ret.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
-            // Simple swap
+            // Simple swap of values
             int a = ret[index];
             ret[index] = ret[i];
             ret[i] = a;
@@ -109,6 +117,8 @@ public class GridModel {
      */
     public boolean isOnGrid(int x, int y) {
         boolean isValid = false;
+
+        //Check that the supplied coordinates are within the bounds of the drawn grid
         if ( PlayGridView.gridLeft + PlayGridView.borderWidth < x
                 && x < PlayGridView.gridWidth + PlayGridView.gridLeft + PlayGridView.borderWidth) {
             if (PlayGridView.gridTop + PlayGridView.borderWidth < y
@@ -130,7 +140,7 @@ public class GridModel {
      */
     public int whichSquare(int x, int y) {
 
-        // Increment through gridRects for a square containing clicked point
+        // Increment through gridRects for a square containing supplied coordinates
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numRows; j++) {
                 if(gridRects[i][j].square.left < x && gridRects[i][j].square.right > x) {
@@ -192,6 +202,7 @@ public class GridModel {
      *
      */
     public void swapSquares(int loc, int locNULL) {
+        //Simple swap of array values
         int temp = locations[locNULL];
         locations[locNULL] = locations[loc];
         locations[loc] = -1;
