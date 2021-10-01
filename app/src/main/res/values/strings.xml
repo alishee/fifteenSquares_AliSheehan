@@ -2,5 +2,5 @@
     <string name="app_name">fifteenSquares_AliSheehan</string>
     <string name="restart_game">Restart Game</string>
     <string name="exit_game">Exit Game</string>
-    <string name="seekBarText">Grid Size</string>
+    <string name="seekBarText">Grid Size: 4 x 4</string>
 </resources>

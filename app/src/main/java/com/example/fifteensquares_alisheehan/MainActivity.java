@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        GridController controller = new GridController( findViewById(R.id.playGridView));
+        GridController controller = new GridController(findViewById(R.id.playGridView));
 
         // Set Seek Bar functionality
         SeekBar seekGridSize = findViewById(R.id.seekGridSize);
@@ -29,6 +31,19 @@ public class MainActivity extends AppCompatActivity {
         gridView.setOnTouchListener(controller);
 
 
+
+    }
+
+    /**
+     * Closes application.
+     *
+     * Copied from CS371 BirthdayCake activity.
+     * @param button button to cause app turn off
+     */
+    public void goodbye(View button) {
+
+
+        finishAffinity();
 
     }
 }
